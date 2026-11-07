@@ -16,6 +16,7 @@ wheels/
 data/
 logs/
 *.duckdb
+duckdb_ui_data_view_in_json
 
 # OS files
 .DS_Store
