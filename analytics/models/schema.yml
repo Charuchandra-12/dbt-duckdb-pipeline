@@ -8,8 +8,13 @@ models:
     columns:
       - name: job_id
         description: "Unique identifier for the job posting."
+        # data_tests:
+        #   - not_null
+        #   - unique
       - name: job_title
         description: "Title of the advertised job."
+        data_tests:
+          - not_null
       - name: company_name
         description: "Name of the company advertising the job."
       - name: job_location
@@ -20,6 +25,10 @@ models:
         description: "Schedule or employment type specified for the job."
       - name: job_work_from_home
         description: "Indicates whether the job allows working from home."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
       - name: search_date
         description: "Date the job posting was found by the search."
       - name: search_term
@@ -34,10 +43,20 @@ models:
     columns:
       - name: month
         description: "Month in which the postings were found."
+        data_tests:
+          - not_null
       - name: role
         description: "Role or search term associated with the postings."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('job_postings')
+                field: search_term
       - name: postings
         description: "Number of postings for the role during the month."
+        data_tests:
+          - not_null
 
   - name: top_locations
     description: "Ten locations with the highest number of job postings."
@@ -48,8 +67,16 @@ models:
     columns:
       - name: job_location
         description: "Location associated with the job postings."
+        data_tests:
+          - unique
+          - relationships:
+              arguments:
+                to: ref('job_postings')
+                field: job_location
       - name: postings
         description: "Number of job postings for the location."
+        data_tests:
+          - not_null
 
   - name: monthly_summary
     description: "Monthly summary of job postings and remote share."
@@ -60,9 +87,14 @@ models:
     columns:
       - name: month
         description: "Month in which the postings were found."
+        data_tests:
+          - not_null
+          - unique
       - name: total_postings
         description: "Total number of job postings during the month."
       - name: remote_share
         description: "Proportion of job postings that allow working from home."
       - name: pct_remote
         description: "Percentage of job postings that allow working from home."
+        data_tests:
+          - not_null
