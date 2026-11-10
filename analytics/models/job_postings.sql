@@ -1,5 +1,6 @@
-SELECT
-    job_id,
+{{config(materialized='view')}}
+
+SELECT job_id,
     job_title,
     company_name,
     job_location,
