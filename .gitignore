@@ -20,3 +20,6 @@ duckdb_ui_data_view_in_json
 
 # OS files
 .DS_Store
+
+# dbt generated files 
+.user.yml
