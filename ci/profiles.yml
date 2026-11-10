@@ -4,4 +4,4 @@ analytics:
     prod:
       type: duckdb
       path: ../data/prod.duckdb
-      threads: 4
+      threads: 4 
